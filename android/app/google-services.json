@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "618675307153",
+    "project_id": "dw-7-job-timer-roveri",
+    "storage_bucket": "dw-7-job-timer-roveri.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:618675307153:android:91c803ea9a485fbad03530",
+        "android_client_info": {
+          "package_name": "br.com.roveri.job_time"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "618675307153-n5dtp90fd481cfvm28b09s4ou13kkeu7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFMCLv10l5Q6JTOKq8V_jXC5KInFvYI8A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "618675307153-n5dtp90fd481cfvm28b09s4ou13kkeu7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
