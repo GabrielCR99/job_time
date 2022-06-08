@@ -17,24 +17,15 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -52,11 +43,42 @@ class DefaultFirebaseOptions {
     }
   }
 
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyBasp7QpsUNP6vZxqpCNe0T43t6kdylLwI',
+    appId: '1:618675307153:web:fac34e0fc6790527d03530',
+    messagingSenderId: '618675307153',
+    projectId: 'dw-7-job-timer-roveri',
+    authDomain: 'dw-7-job-timer-roveri.firebaseapp.com',
+    storageBucket: 'dw-7-job-timer-roveri.appspot.com',
+  );
+
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDFMCLv10l5Q6JTOKq8V_jXC5KInFvYI8A',
     appId: '1:618675307153:android:91c803ea9a485fbad03530',
     messagingSenderId: '618675307153',
     projectId: 'dw-7-job-timer-roveri',
     storageBucket: 'dw-7-job-timer-roveri.appspot.com',
+  );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyCaXSC83K1ulzaypeAphOMymnSCyrK0skM',
+    appId: '1:618675307153:ios:96d4c897ec06821dd03530',
+    messagingSenderId: '618675307153',
+    projectId: 'dw-7-job-timer-roveri',
+    storageBucket: 'dw-7-job-timer-roveri.appspot.com',
+    androidClientId: '618675307153-dtn2rckdgbi2h1mikfegkrr6t7ue7ljh.apps.googleusercontent.com',
+    iosClientId: '618675307153-hbgpgtvsg3ajoj4h8im0fq5rhkmg65ej.apps.googleusercontent.com',
+    iosBundleId: 'br.com.roveri.jobTime',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyCaXSC83K1ulzaypeAphOMymnSCyrK0skM',
+    appId: '1:618675307153:ios:96d4c897ec06821dd03530',
+    messagingSenderId: '618675307153',
+    projectId: 'dw-7-job-timer-roveri',
+    storageBucket: 'dw-7-job-timer-roveri.appspot.com',
+    androidClientId: '618675307153-dtn2rckdgbi2h1mikfegkrr6t7ue7ljh.apps.googleusercontent.com',
+    iosClientId: '618675307153-hbgpgtvsg3ajoj4h8im0fq5rhkmg65ej.apps.googleusercontent.com',
+    iosBundleId: 'br.com.roveri.jobTime',
   );
 }

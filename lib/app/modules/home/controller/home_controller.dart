@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
+import '../../../core/exceptions/failure.dart';
 import '../../../entities/project_status.dart';
 import '../../../services/projects/project_service.dart';
 import '../../../view_models/project_model.dart';
@@ -21,9 +22,26 @@ class HomeController extends Cubit<HomeState> {
       emit(state.copyWith(status: HomeStatus.loading));
       final projects = await _service.findByStatus(state.projectStatus);
       emit(state.copyWith(status: HomeStatus.complete, projects: projects));
-    } on Exception catch (e, s) {
-      log('Erro ao buscar projetos', error: e, stackTrace: s);
+    } on Failure catch (e, s) {
+      log('Erro ao buscar projetos ${e.message}', error: e, stackTrace: s);
       emit(state.copyWith(status: HomeStatus.failure));
     }
+  }
+
+  Future<void> filter(ProjectStatus status) async {
+    emit(
+      state.copyWith(
+        status: HomeStatus.loading,
+        projects: const <ProjectModel>[],
+      ),
+    );
+    final projects = await _service.findByStatus(status);
+    emit(
+      state.copyWith(
+        status: HomeStatus.complete,
+        projects: projects,
+        projectStatus: status,
+      ),
+    );
   }
 }

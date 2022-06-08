@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -10,17 +13,20 @@ class DatabaseImpl implements Database {
 
   @override
   Future<Isar> openConnection() async {
-    if (_databaseInstance == null) {
-      final dir = await getApplicationSupportDirectory();
-      _databaseInstance = await Isar.open(
-        schemas: [
-          ProjectTaskSchema,
-          ProjectSchema,
-        ],
-        directory: dir.path,
-        inspector: true,
-      );
+    Directory? dir;
+
+    if (!kIsWeb) {
+      dir = await getApplicationSupportDirectory();
     }
+
+    _databaseInstance ??= await Isar.open(
+      schemas: [
+        ProjectTaskSchema,
+        ProjectSchema,
+      ],
+      directory: !kIsWeb ? dir?.path : '',
+      inspector: true,
+    );
 
     return _databaseInstance!;
   }

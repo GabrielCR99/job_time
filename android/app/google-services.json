@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "618675307153-dtn2rckdgbi2h1mikfegkrr6t7ue7ljh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.roveri.job_time",
+            "certificate_hash": "eef401cc3c79d74f1d2085e693c6e8acc4aa84d8"
+          }
+        },
+        {
           "client_id": "618675307153-n5dtp90fd481cfvm28b09s4ou13kkeu7.apps.googleusercontent.com",
           "client_type": 3
         }

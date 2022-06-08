@@ -6,6 +6,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import '../../view_models/project_model.dart';
 import 'controller/home_controller.dart';
 import 'widgets/header_projects_menu.dart';
+import 'widgets/project_tile.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -28,6 +29,7 @@ class HomePage extends StatelessWidget {
         ),
         body: SafeArea(
           child: CustomScrollView(
+            cacheExtent: 4 * 100,
             slivers: [
               const SliverAppBar(
                 title: Text('Projetos'),
@@ -65,12 +67,7 @@ class HomePage extends StatelessWidget {
                   return SliverList(
                     delegate: SliverChildListDelegate(
                       projects
-                          .map(
-                            (e) => ListTile(
-                              title: Text(e.name),
-                              subtitle: Text('${e.estimate} horas'),
-                            ),
-                          )
+                          .map((project) => ProjectTile(projectModel: project))
                           .toList(),
                     ),
                   );
@@ -83,7 +80,7 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  void _showError(_, state) {
+  void _showError(BuildContext _, HomeState state) {
     if (state.status == HomeStatus.failure) {
       AsukaSnackbar.alert('Erro ao buscar projetos').show();
     }

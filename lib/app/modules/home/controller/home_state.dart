@@ -20,7 +20,7 @@ class HomeState extends Equatable {
 
   const HomeState.initial()
       : this._(
-          projects: const [],
+          projects: const <ProjectModel>[],
           status: HomeStatus.inital,
           projectStatus: ProjectStatus.inProgress,
         );

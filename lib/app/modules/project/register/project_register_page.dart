@@ -1,9 +1,11 @@
 import 'package:asuka/asuka.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:validatorless/validatorless.dart';
 
+import '../../../core/ui/loading_button.dart';
 import 'controller/project_register_controller.dart';
 
 class ProjectRegisterPage extends StatefulWidget {
@@ -58,31 +60,24 @@ class _ProjectRegisterPageState extends State<ProjectRegisterPage> {
                 TextFormField(
                   controller: _estimateEC,
                   keyboardType: TextInputType.number,
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   validator: Validatorless.multiple([
                     Validatorless.required('Estimativa obrigatória!'),
-                    Validatorless.number('Somente números'),
+                    Validatorless.number('Deve conter somente números'),
                   ]),
                   decoration:
                       const InputDecoration(label: Text('Estimativa de horas')),
                 ),
                 const SizedBox(height: 10),
-                BlocSelector<ProjectRegisterController, ProjectRegisterStatus,
-                    bool>(
-                  bloc: _controller,
-                  selector: (state) => state == ProjectRegisterStatus.loading,
-                  builder: (_, showLoader) => Visibility(
-                    visible: showLoader,
-                    child: const Center(
-                      child: CircularProgressIndicator.adaptive(),
-                    ),
-                  ),
-                ),
                 SizedBox(
                   width: MediaQuery.of(context).size.width,
                   height: 49,
-                  child: ElevatedButton(
+                  child: LoadingButton<ProjectRegisterController,
+                      ProjectRegisterStatus>(
                     onPressed: _registerTask,
-                    child: const Text('Salvar'),
+                    label: 'Salvar',
+                    bloc: _controller,
+                    selector: (state) => state == ProjectRegisterStatus.loading,
                   ),
                 ),
               ],

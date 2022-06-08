@@ -30,7 +30,7 @@ import 'package:flutter/widgets.dart';
 class JobTimerIcons {
   const JobTimerIcons._();
 
-  static const _kFontFam = 'App';
+  static const _kFontFam = 'JobTimerIcons';
 
   static const IconData okCircled2 = IconData(0xe800, fontFamily: _kFontFam);
   static const IconData angleDoubleRight =

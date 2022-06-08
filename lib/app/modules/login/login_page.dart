@@ -69,7 +69,7 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  void _showLoginError(_, state) {
+  void _showLoginError(BuildContext _, LoginState state) {
     if (state.status == LoginStatus.failure) {
       final message = state.errorMessage ?? 'Erro ao realizar login';
       AsukaSnackbar.alert(message).show();

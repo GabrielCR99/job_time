@@ -19,7 +19,7 @@ class ProjectRepositoryImpl implements ProjectRepository {
     try {
       final connection = await _database.openConnection();
 
-      connection.writeTxn((isar) => isar.projects.put(project));
+      await connection.writeTxn((isar) => isar.projects.put(project));
     } on IsarError catch (e, s) {
       log('Erro ao cadastrar projeto!', error: e, stackTrace: s);
       Error.throwWithStackTrace(
@@ -31,8 +31,16 @@ class ProjectRepositoryImpl implements ProjectRepository {
 
   @override
   Future<List<Project>> findByStatus(ProjectStatus status) async {
-    final connection = await _database.openConnection();
+    try {
+      final connection = await _database.openConnection();
 
-    return await connection.projects.filter().statusEqualTo(status).findAll();
+      return await connection.projects.filter().statusEqualTo(status).findAll();
+    } catch (e, s) {
+      log('Erro ao buscar projetos!', error: e, stackTrace: s);
+      Error.throwWithStackTrace(
+        Failure(message: 'Erro ao buscar projetos $e'),
+        s,
+      );
+    }
   }
 }
