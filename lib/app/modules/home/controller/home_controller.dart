@@ -5,6 +5,7 @@ import 'package:equatable/equatable.dart';
 
 import '../../../core/exceptions/failure.dart';
 import '../../../entities/project_status.dart';
+import '../../../services/auth/auth_service.dart';
 import '../../../services/projects/project_service.dart';
 import '../../../view_models/project_model.dart';
 
@@ -12,9 +13,13 @@ part 'home_state.dart';
 
 class HomeController extends Cubit<HomeState> {
   final ProjectService _service;
+  final AuthService _authService;
 
-  HomeController({required ProjectService service})
-      : _service = service,
+  HomeController({
+    required ProjectService service,
+    required AuthService authService,
+  })  : _service = service,
+        _authService = authService,
         super(const HomeState.initial());
 
   Future<void> loadProjects() async {
@@ -44,4 +49,8 @@ class HomeController extends Cubit<HomeState> {
       ),
     );
   }
+
+  Future<void> updateList() async => filter(state.projectStatus);
+
+  Future<void> logout() async => await _authService.signOut();
 }

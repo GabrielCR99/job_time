@@ -15,8 +15,8 @@ import 'services/projects/project_service_impl.dart';
 class AppModule extends Module {
   @override
   final List<Bind> binds = [
-    Bind.lazySingleton((_) => AuthServiceImpl()),
     Bind.lazySingleton<Database>((_) => DatabaseImpl()),
+    Bind.lazySingleton((i) => AuthServiceImpl(database: i())),
     Bind.lazySingleton<ProjectRepository>(
       (i) => ProjectRepositoryImpl(database: i()),
     ),

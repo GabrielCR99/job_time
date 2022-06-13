@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../core/job_timer_icons.dart';
 import '../../../view_models/project_model.dart';
+import '../controller/home_controller.dart';
 
 class ProjectTile extends StatelessWidget {
   final ProjectModel projectModel;
@@ -24,8 +25,7 @@ class ProjectTile extends StatelessWidget {
         ),
       ),
       child: InkWell(
-        onTap: () =>
-            Modular.to.pushNamed('/project/detail/', arguments: projectModel),
+        onTap: () async => await _goToProjectDetail(),
         child: Column(
           children: [
             _ProjectName(projectModel: projectModel),
@@ -34,6 +34,11 @@ class ProjectTile extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> _goToProjectDetail() async {
+    await Modular.to.pushNamed('/project/detail/', arguments: projectModel);
+    await Modular.get<HomeController>().updateList();
   }
 }
 
@@ -77,10 +82,15 @@ class _ProjectProgress extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-            child: LinearProgressIndicator(
-              value: _projectPercentage,
-              backgroundColor: Colors.grey,
-              color: Theme.of(context).primaryColor,
+            child: ClipRRect(
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
+              child: LinearProgressIndicator(
+                value: _projectPercentage,
+                backgroundColor: Colors.grey,
+                color: _projectPercentage > 1
+                    ? Colors.red
+                    : Theme.of(context).primaryColor,
+              ),
             ),
           ),
           Padding(

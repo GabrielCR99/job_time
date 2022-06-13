@@ -6,7 +6,8 @@ import '../../core/database/database.dart';
 import '../../core/exceptions/failure.dart';
 import '../../entities/project.dart';
 import '../../entities/project_status.dart';
-import './project_repository.dart';
+import '../../entities/project_task.dart';
+import 'project_repository.dart';
 
 class ProjectRepositoryImpl implements ProjectRepository {
   final Database _database;
@@ -39,6 +40,56 @@ class ProjectRepositoryImpl implements ProjectRepository {
       log('Erro ao buscar projetos!', error: e, stackTrace: s);
       Error.throwWithStackTrace(
         Failure(message: 'Erro ao buscar projetos $e'),
+        s,
+      );
+    }
+  }
+
+  @override
+  Future<Project> addTask(int projectId, ProjectTask task) async {
+    try {
+      final connection = await _database.openConnection();
+
+      final project = await findById(projectId);
+
+      project.tasks.add(task);
+      await connection.writeTxn((_) async => await project.tasks.save());
+
+      return project;
+    } on IsarError catch (e, s) {
+      log('Erro ao cadastrar task!', error: e, stackTrace: s);
+      Error.throwWithStackTrace(
+        const Failure(message: 'Erro ao cadastrar task!'),
+        s,
+      );
+    }
+  }
+
+  @override
+  Future<Project> findById(int projectId) async {
+    final connection = await _database.openConnection();
+
+    final project = await connection.projects.get(projectId);
+    if (project == null) {
+      throw const Failure(message: 'Erro ao encontrar projeto');
+    }
+
+    return project;
+  }
+
+  @override
+  Future<void> finish(int projectId) async {
+    try {
+      final connection = await _database.openConnection();
+      final project = await findById(projectId);
+      project.status = ProjectStatus.finished;
+      await connection.writeTxn(
+        (isar) async => await connection.projects.put(project, saveLinks: true),
+      );
+    } on IsarError catch (e, s) {
+      log('Erro ao finalizar projeto', error: e, stackTrace: s);
+      Error.throwWithStackTrace(
+        const Failure(message: 'Erro ao finalizar projeto'),
         s,
       );
     }

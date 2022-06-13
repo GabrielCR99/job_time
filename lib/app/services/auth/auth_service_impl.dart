@@ -1,9 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-import './auth_service.dart';
+import '../../core/database/database.dart';
+import 'auth_service.dart';
 
 class AuthServiceImpl implements AuthService {
+  final Database _database;
+  AuthServiceImpl({
+    required Database database,
+  }) : _database = database;
+
   @override
   Future<void> signIn() async {
     final googleUser = await GoogleSignIn().signIn();
@@ -22,5 +28,7 @@ class AuthServiceImpl implements AuthService {
   Future<void> signOut() async {
     await FirebaseAuth.instance.signOut();
     await GoogleSignIn().disconnect();
+    final connection = await _database.openConnection();
+    await connection.writeTxn((isar) => isar.clear());
   }
 }

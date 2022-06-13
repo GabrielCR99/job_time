@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 
+import '../../../../view_models/project_task_model.dart';
+
 class ProjectTaskTile extends StatelessWidget {
-  const ProjectTaskTile({super.key});
+  final ProjectTaskModel task;
+
+  const ProjectTaskTile({
+    required this.task,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,15 +22,18 @@ class ProjectTaskTile extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text('Nome da task'),
+          Text(task.name),
           RichText(
-            text: const TextSpan(
+            text: TextSpan(
               children: [
-                TextSpan(text: 'Duração', style: TextStyle(color: Colors.grey)),
-                WidgetSpan(child: SizedBox(width: 15)),
+                const TextSpan(
+                  text: 'Duração',
+                  style: TextStyle(color: Colors.grey),
+                ),
+                const WidgetSpan(child: SizedBox(width: 15)),
                 TextSpan(
-                  text: '4h',
-                  style: TextStyle(
+                  text: '${task.duration}h',
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
                   ),

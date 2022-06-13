@@ -20,10 +20,11 @@ class HomePage extends StatelessWidget {
       listener: _showError,
       child: Scaffold(
         backgroundColor: Colors.white,
-        drawer: const Drawer(
+        drawer: Drawer(
           child: SafeArea(
             child: ListTile(
-              title: Text('Sair'),
+              title: const Text('Sair'),
+              onTap: _controller.logout,
             ),
           ),
         ),
@@ -53,9 +54,8 @@ class HomePage extends StatelessWidget {
                   sliver: const SliverToBoxAdapter(
                     child: SizedBox(
                       height: 50,
-                      child: Center(
-                        child: CircularProgressIndicator.adaptive(),
-                      ),
+                      child:
+                          Center(child: CircularProgressIndicator.adaptive()),
                     ),
                   ),
                 ),

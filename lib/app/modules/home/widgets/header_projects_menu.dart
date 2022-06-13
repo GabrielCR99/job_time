@@ -7,6 +7,10 @@ import '../controller/home_controller.dart';
 class HeaderProjectsMenu extends SliverPersistentHeaderDelegate {
   final _controller = Modular.get<HomeController>();
 
+  final _dropdownBorderRadius = const OutlineInputBorder(
+    borderRadius: BorderRadius.all(Radius.circular(15)),
+  );
+
   @override
   Widget build(
     BuildContext context,
@@ -27,11 +31,12 @@ class HeaderProjectsMenu extends SliverPersistentHeaderDelegate {
                 padding: const EdgeInsets.only(right: 8.0),
                 child: DropdownButtonFormField<ProjectStatus>(
                   value: ProjectStatus.inProgress,
-                  decoration: const InputDecoration(
-                    contentPadding: EdgeInsets.all(10),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                    ),
+                  borderRadius: const BorderRadius.all(Radius.circular(15)),
+                  decoration: InputDecoration(
+                    focusedBorder: _dropdownBorderRadius,
+                    contentPadding: const EdgeInsets.all(10),
+                    border: _dropdownBorderRadius,
+                    enabledBorder: _dropdownBorderRadius,
                   ),
                   items: ProjectStatus.values
                       .map(

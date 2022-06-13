@@ -6,14 +6,14 @@ import 'package:path_provider/path_provider.dart';
 
 import '../../entities/project.dart';
 import '../../entities/project_task.dart';
-import './database.dart';
+import 'database.dart';
 
 class DatabaseImpl implements Database {
   Isar? _databaseInstance;
 
   @override
   Future<Isar> openConnection() async {
-    Directory? dir;
+    Directory dir = Directory('');
 
     if (!kIsWeb) {
       dir = await getApplicationSupportDirectory();
@@ -24,7 +24,7 @@ class DatabaseImpl implements Database {
         ProjectTaskSchema,
         ProjectSchema,
       ],
-      directory: !kIsWeb ? dir?.path : '',
+      directory: dir.path,
       inspector: true,
     );
 

@@ -17,25 +17,26 @@ class LoadingButton<B extends StateStreamable<S>, S> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: onPressed,
-      child: BlocSelector<B, S, bool>(
-        bloc: bloc,
-        selector: selector,
-        builder: (_, showLoading) => !showLoading
-            ? Text(label)
-            : Stack(
-                alignment: Alignment.center,
-                children: [
-                  Text(label),
-                  const Align(
-                    alignment: Alignment.centerRight,
-                    child: CircularProgressIndicator.adaptive(
-                      backgroundColor: Colors.white,
-                    ),
-                  ),
-                ],
+    return BlocSelector<B, S, bool>(
+      bloc: bloc,
+      selector: selector,
+      builder: (_, showLoading) => ElevatedButton(
+        onPressed: showLoading ? null : onPressed,
+        style: !showLoading
+            ? ElevatedButton.styleFrom()
+            : ElevatedButton.styleFrom(
+                shape: const CircleBorder(),
+                onSurface: Colors.blue,
               ),
+        child: Visibility(
+          visible: showLoading,
+          replacement: Text(label),
+          child: const Center(
+            child: CircularProgressIndicator.adaptive(
+              backgroundColor: Colors.white,
+            ),
+          ),
+        ),
       ),
     );
   }

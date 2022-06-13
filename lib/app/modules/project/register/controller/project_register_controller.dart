@@ -6,6 +6,7 @@ import '../../../../entities/project_status.dart';
 import '../../../../services/projects/project_service.dart';
 import '../../../../view_models/project_model.dart';
 import '../../../../view_models/project_task_model.dart';
+
 part 'project_register_state.dart';
 
 class ProjectRegisterController extends Cubit<ProjectRegisterStatus> {
