@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 import '../../entities/project.dart';
 import '../../entities/project_status.dart';
 import '../../entities/project_task.dart';
@@ -15,7 +17,6 @@ class ProjectServiceImpl implements ProjectService {
   @override
   Future<void> register(ProjectModel projectModel) async {
     final project = Project()
-      ..id = projectModel.id
       ..name = projectModel.name
       ..estimate = projectModel.estimate
       ..status = projectModel.status;
@@ -26,6 +27,10 @@ class ProjectServiceImpl implements ProjectService {
   @override
   Future<List<ProjectModel>> findByStatus(ProjectStatus status) async {
     final projects = await _repository.findByStatus(status);
+
+    for (final project in projects) {
+      await project.tasks.load();
+    }
 
     return projects.map(ProjectModel.fromEntity).toList();
   }
@@ -38,6 +43,8 @@ class ProjectServiceImpl implements ProjectService {
 
     final project = await _repository.addTask(projectId, projectTask);
 
+    await _loadTasks(project);
+
     return ProjectModel.fromEntity(project);
   }
 
@@ -45,10 +52,20 @@ class ProjectServiceImpl implements ProjectService {
   Future<ProjectModel> findById(int projectId) async {
     final project = await _repository.findById(projectId);
 
+    await _loadTasks(project);
+
     return ProjectModel.fromEntity(project);
   }
 
   @override
   Future<void> finish(int projectId) async =>
       await _repository.finish(projectId);
+
+  Future<void> _loadTasks(Project project) async {
+    if (!kIsWeb) {
+      project.tasks.loadSync();
+    } else {
+      await project.tasks.load();
+    }
+  }
 }

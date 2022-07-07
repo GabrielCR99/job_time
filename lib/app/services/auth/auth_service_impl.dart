@@ -29,6 +29,6 @@ class AuthServiceImpl implements AuthService {
     await FirebaseAuth.instance.signOut();
     await GoogleSignIn().disconnect();
     final connection = await _database.openConnection();
-    await connection.writeTxn((isar) => isar.clear());
+    await connection.writeTxn(() async => await connection.clear());
   }
 }

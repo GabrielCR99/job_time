@@ -8,8 +8,7 @@ part 'project.g.dart';
 
 @Collection()
 class Project {
-  @Id()
-  int? id;
+  int id = Isar.autoIncrement;
   late String name;
   late int estimate;
 

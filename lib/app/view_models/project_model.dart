@@ -1,5 +1,3 @@
-import 'package:flutter/foundation.dart';
-
 import '../entities/project.dart';
 import '../entities/project_status.dart';
 import 'project_task_model.dart';
@@ -20,10 +18,6 @@ class ProjectModel {
   });
 
   factory ProjectModel.fromEntity(Project project) {
-    if (!kIsWeb) {
-      project.tasks.loadSync();
-    }
-
     return ProjectModel(
       name: project.name,
       estimate: project.estimate,

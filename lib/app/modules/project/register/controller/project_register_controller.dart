@@ -26,7 +26,7 @@ class ProjectRegisterController extends Cubit<ProjectRegisterStatus> {
         name: name,
         estimate: estimate,
         status: ProjectStatus.inProgress,
-        tasks: const <ProjectTaskModel>[],
+        tasks: <ProjectTaskModel>[],
       );
       await _service.register(project);
       emit(ProjectRegisterStatus.success);

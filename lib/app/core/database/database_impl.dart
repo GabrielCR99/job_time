@@ -20,12 +20,11 @@ class DatabaseImpl implements Database {
     }
 
     _databaseInstance ??= await Isar.open(
-      schemas: [
+      [
         ProjectTaskSchema,
         ProjectSchema,
       ],
       directory: dir.path,
-      inspector: true,
     );
 
     return _databaseInstance!;

@@ -22,6 +22,10 @@ class HomeController extends Cubit<HomeState> {
         _authService = authService,
         super(const HomeState.initial());
 
+  var _projectStatus = ProjectStatus.inProgress;
+
+  ProjectStatus get projectStatus => _projectStatus;
+
   Future<void> loadProjects() async {
     try {
       emit(state.copyWith(status: HomeStatus.loading));
@@ -40,6 +44,7 @@ class HomeController extends Cubit<HomeState> {
         projects: const <ProjectModel>[],
       ),
     );
+    _projectStatus = status;
     final projects = await _service.findByStatus(status);
     emit(
       state.copyWith(

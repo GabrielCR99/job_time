@@ -21,7 +21,12 @@ class LoadingButton<B extends StateStreamable<S>, S> extends StatelessWidget {
       bloc: bloc,
       selector: selector,
       builder: (_, showLoading) => ElevatedButton(
-        onPressed: showLoading ? null : onPressed,
+        onPressed: showLoading
+            ? null
+            : () {
+                FocusScope.of(context).unfocus();
+                onPressed();
+              },
         style: !showLoading
             ? ElevatedButton.styleFrom()
             : ElevatedButton.styleFrom(

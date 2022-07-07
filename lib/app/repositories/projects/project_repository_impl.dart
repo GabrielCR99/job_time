@@ -20,7 +20,9 @@ class ProjectRepositoryImpl implements ProjectRepository {
     try {
       final connection = await _database.openConnection();
 
-      await connection.writeTxn((isar) => isar.projects.put(project));
+      await connection.writeTxn(
+        () async => project.id = await connection.projects.put(project),
+      );
     } on IsarError catch (e, s) {
       log('Erro ao cadastrar projeto!', error: e, stackTrace: s);
       Error.throwWithStackTrace(
@@ -53,13 +55,16 @@ class ProjectRepositoryImpl implements ProjectRepository {
       final project = await findById(projectId);
 
       project.tasks.add(task);
-      await connection.writeTxn((_) async => await project.tasks.save());
+      await connection
+          .writeTxn(() async => await connection.projectTasks.put(task));
+
+      await connection.writeTxn(() async => await project.tasks.save());
 
       return project;
     } on IsarError catch (e, s) {
       log('Erro ao cadastrar task!', error: e, stackTrace: s);
       Error.throwWithStackTrace(
-        const Failure(message: 'Erro ao cadastrar task!'),
+        const Failure(message: 'Error creating task!'),
         s,
       );
     }
@@ -68,10 +73,9 @@ class ProjectRepositoryImpl implements ProjectRepository {
   @override
   Future<Project> findById(int projectId) async {
     final connection = await _database.openConnection();
-
     final project = await connection.projects.get(projectId);
     if (project == null) {
-      throw const Failure(message: 'Erro ao encontrar projeto');
+      throw const Failure(message: 'Error finding project!');
     }
 
     return project;
@@ -84,7 +88,7 @@ class ProjectRepositoryImpl implements ProjectRepository {
       final project = await findById(projectId);
       project.status = ProjectStatus.finished;
       await connection.writeTxn(
-        (isar) async => await connection.projects.put(project, saveLinks: true),
+        () async => await connection.projects.put(project),
       );
     } on IsarError catch (e, s) {
       log('Erro ao finalizar projeto', error: e, stackTrace: s);
