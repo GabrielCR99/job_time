@@ -17,12 +17,11 @@ class ProjectDetailState extends Equatable {
   ProjectDetailState copyWith({
     ProjectModel? model,
     ProjectDetailStatus? status,
-  }) {
-    return ProjectDetailState._(
-      model: model ?? this.model,
-      status: status ?? this.status,
-    );
-  }
+  }) =>
+      ProjectDetailState._(
+        model: model ?? this.model,
+        status: status ?? this.status,
+      );
 
   @override
   List<Object?> get props => [model, status];

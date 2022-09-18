@@ -58,8 +58,7 @@ class ProjectServiceImpl implements ProjectService {
   }
 
   @override
-  Future<void> finish(int projectId) async =>
-      await _repository.finish(projectId);
+  Future<void> finish(int projectId) async => _repository.finish(projectId);
 
   Future<void> _loadTasks(Project project) async {
     if (!kIsWeb) {

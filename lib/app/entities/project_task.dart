@@ -4,7 +4,7 @@ part 'project_task.g.dart';
 
 @Collection()
 class ProjectTask {
-  int id = Isar.autoIncrement;
+  Id? id;
   late String name;
   late int duration;
   late DateTime created = DateTime.now();

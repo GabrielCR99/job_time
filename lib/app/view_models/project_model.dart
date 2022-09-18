@@ -17,13 +17,11 @@ class ProjectModel {
     this.id,
   });
 
-  factory ProjectModel.fromEntity(Project project) {
-    return ProjectModel(
-      name: project.name,
-      estimate: project.estimate,
-      status: project.status,
-      tasks: project.tasks.map(ProjectTaskModel.fromEntity).toList(),
-      id: project.id,
-    );
-  }
+  factory ProjectModel.fromEntity(Project project) => ProjectModel(
+        name: project.name,
+        estimate: project.estimate,
+        status: project.status,
+        tasks: project.tasks.map(ProjectTaskModel.fromEntity).toList(),
+        id: project.id,
+      );
 }

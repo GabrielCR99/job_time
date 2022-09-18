@@ -54,7 +54,7 @@ class ProjectPieChart extends StatelessWidget {
           ];
 
     return Padding(
-      padding: const EdgeInsets.only(top: 50, bottom: 50),
+      padding: const EdgeInsets.symmetric(vertical: 50),
       child: SizedBox(
         height: 200,
         width: 200,

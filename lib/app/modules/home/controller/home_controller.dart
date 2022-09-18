@@ -57,5 +57,5 @@ class HomeController extends Cubit<HomeState> {
 
   Future<void> updateList() async => filter(state.projectStatus);
 
-  Future<void> logout() async => await _authService.signOut();
+  Future<void> logout() async => _authService.signOut();
 }

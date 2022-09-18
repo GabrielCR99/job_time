@@ -31,7 +31,8 @@ class LoadingButton<B extends StateStreamable<S>, S> extends StatelessWidget {
             ? ElevatedButton.styleFrom()
             : ElevatedButton.styleFrom(
                 shape: const CircleBorder(),
-                onSurface: Colors.blue,
+                disabledForegroundColor: Colors.blue.withOpacity(0.38),
+                disabledBackgroundColor: Colors.blue.withOpacity(0.12),
               ),
         child: Visibility(
           visible: showLoading,

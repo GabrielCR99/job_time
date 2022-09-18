@@ -16,17 +16,14 @@ class ProjectRegisterController extends Cubit<ProjectRegisterStatus> {
       : _service = service,
         super(ProjectRegisterStatus.initial);
 
-  Future<void> register({
-    required String name,
-    required int estimate,
-  }) async {
+  Future<void> register({required String name, required int estimate}) async {
     try {
       emit(ProjectRegisterStatus.loading);
       final project = ProjectModel(
         name: name,
         estimate: estimate,
         status: ProjectStatus.inProgress,
-        tasks: <ProjectTaskModel>[],
+        tasks: const <ProjectTaskModel>[],
       );
       await _service.register(project);
       emit(ProjectRegisterStatus.success);

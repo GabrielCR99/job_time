@@ -19,10 +19,9 @@ class LoginState extends Equatable {
   LoginState copyWith({
     LoginStatus? status,
     String? errorMessage,
-  }) {
-    return LoginState._(
-      status: status ?? this.status,
-      errorMessage: errorMessage ?? this.errorMessage,
-    );
-  }
+  }) =>
+      LoginState._(
+        status: status ?? this.status,
+        errorMessage: errorMessage ?? this.errorMessage,
+      );
 }

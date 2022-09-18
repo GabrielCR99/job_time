@@ -16,13 +16,15 @@ class LoadedProjectPage extends StatelessWidget {
     required this.projectModel,
     required this.totalTasks,
     required this.onPressed,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: CustomScrollView(
+        scrollBehavior:
+            const MaterialScrollBehavior().copyWith(overscroll: false),
         slivers: [
           ProjectDetailAppbar(model: projectModel),
           SliverToBoxAdapter(
@@ -42,7 +44,7 @@ class LoadedProjectPage extends StatelessWidget {
             child: Align(
               alignment: Alignment.bottomRight,
               child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(16),
                 child: Visibility(
                   visible: projectModel.status != ProjectStatus.finished &&
                       projectModel.tasks.isNotEmpty,

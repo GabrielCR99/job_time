@@ -62,11 +62,11 @@ class _NewTasks extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () async => await _getAllProjectTasks(),
+      onTap: () async => _getAllProjectTasks(),
       child: Row(
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            padding: const EdgeInsets.symmetric(vertical: 8),
             child: CircleAvatar(
               backgroundColor: Theme.of(context).primaryColor,
               child: const Icon(

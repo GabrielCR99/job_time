@@ -13,17 +13,14 @@ class DatabaseImpl implements Database {
 
   @override
   Future<Isar> openConnection() async {
-    Directory dir = Directory('');
+    var dir = Directory('');
 
     if (!kIsWeb) {
       dir = await getApplicationSupportDirectory();
     }
 
     _databaseInstance ??= await Isar.open(
-      [
-        ProjectTaskSchema,
-        ProjectSchema,
-      ],
+      [ProjectTaskSchema, ProjectSchema],
       directory: dir.path,
     );
 

@@ -8,6 +8,7 @@ import 'modules/project/project_module.dart';
 import 'modules/splash/splash_page.dart';
 import 'repositories/projects/project_repository.dart';
 import 'repositories/projects/project_repository_impl.dart';
+import 'services/auth/auth_service.dart';
 import 'services/auth/auth_service_impl.dart';
 import 'services/projects/project_service.dart';
 import 'services/projects/project_service_impl.dart';
@@ -16,7 +17,7 @@ class AppModule extends Module {
   @override
   final List<Bind> binds = [
     Bind.lazySingleton<Database>((_) => DatabaseImpl()),
-    Bind.lazySingleton((i) => AuthServiceImpl(database: i())),
+    Bind.lazySingleton<AuthService>((i) => AuthServiceImpl(database: i())),
     Bind.lazySingleton<ProjectRepository>(
       (i) => ProjectRepositoryImpl(database: i()),
     ),

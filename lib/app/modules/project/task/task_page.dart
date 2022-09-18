@@ -50,20 +50,28 @@ class _TaskPageState extends State<TaskPage> {
             style: TextStyle(color: Colors.black),
           ),
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                TextFormField(
+        body: Form(
+          key: _formKey,
+          child: ListView(
+            padding: const EdgeInsets.all(16),
+            children: [
+              BlocSelector<TaskController, TaskStatus, bool>(
+                bloc: _controller,
+                selector: (state) => state != TaskStatus.loading,
+                builder: (_, enabled) => TextFormField(
+                  enabled: enabled,
                   decoration:
                       const InputDecoration(label: Text('Nome da task')),
                   controller: _nameEC,
                   validator: Validatorless.required('Nome obrigatório'),
                 ),
-                const SizedBox(height: 10),
-                TextFormField(
+              ),
+              const SizedBox(height: 10),
+              BlocSelector<TaskController, TaskStatus, bool>(
+                selector: (state) => state != TaskStatus.loading,
+                bloc: _controller,
+                builder: (_, enabled) => TextFormField(
+                  enabled: enabled,
                   decoration:
                       const InputDecoration(label: Text('Duração da task')),
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
@@ -74,19 +82,19 @@ class _TaskPageState extends State<TaskPage> {
                     Validatorless.required('Somente números'),
                   ]),
                 ),
-                const SizedBox(height: 10),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  height: 49,
-                  child: LoadingButton<TaskController, TaskStatus>(
-                    bloc: _controller,
-                    label: 'Salvar',
-                    selector: (state) => state == TaskStatus.loading,
-                    onPressed: _saveTask,
-                  ),
+              ),
+              const SizedBox(height: 10),
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                height: 49,
+                child: LoadingButton<TaskController, TaskStatus>(
+                  bloc: _controller,
+                  label: 'Salvar',
+                  selector: (state) => state == TaskStatus.loading,
+                  onPressed: _saveTask,
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

@@ -19,8 +19,7 @@ class LoginPage extends StatelessWidget {
       listener: _showLoginError,
       bloc: _controller,
       child: Scaffold(
-        appBar: AppBar(title: const Text('')),
-        body: Container(
+        body: DecoratedBox(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [
@@ -41,7 +40,7 @@ class LoginPage extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: _controller.signIn,
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.grey[200],
+                      backgroundColor: Colors.grey[200],
                     ),
                     child: Image.asset('assets/images/google.png'),
                   ),
@@ -52,7 +51,7 @@ class LoginPage extends StatelessWidget {
                   builder: (_, show) => Visibility(
                     visible: show,
                     child: const Padding(
-                      padding: EdgeInsets.only(top: 16.0),
+                      padding: EdgeInsets.only(top: 16),
                       child: Center(
                         child: CircularProgressIndicator.adaptive(
                           backgroundColor: Colors.white,

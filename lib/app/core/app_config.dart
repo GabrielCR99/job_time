@@ -16,12 +16,12 @@ class AppConfig {
     await _firebaseCoreConfig();
   }
 
-  Future<void> _firebaseCoreConfig() async => await Firebase.initializeApp(
+  Future<void> _firebaseCoreConfig() async => Firebase.initializeApp(
         options: DefaultFirebaseOptions.currentPlatform,
       );
 
   Future<void> _setScreenOrientationToPortrait() async =>
-      await SystemChrome.setPreferredOrientations([
+      SystemChrome.setPreferredOrientations([
         DeviceOrientation.portraitUp,
         DeviceOrientation.portraitDown,
       ]);

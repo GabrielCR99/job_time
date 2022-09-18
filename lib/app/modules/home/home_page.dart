@@ -31,6 +31,8 @@ class HomePage extends StatelessWidget {
         body: SafeArea(
           child: CustomScrollView(
             cacheExtent: 4 * 100,
+            scrollBehavior:
+                const MaterialScrollBehavior().copyWith(overscroll: false),
             slivers: [
               const SliverAppBar(
                 title: Text('Projetos'),

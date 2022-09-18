@@ -25,7 +25,7 @@ class ProjectTile extends StatelessWidget {
         ),
       ),
       child: InkWell(
-        onTap: () async => await _goToProjectDetail(),
+        onTap: () async => _goToProjectDetail(),
         child: Column(
           children: [
             _ProjectName(projectModel: projectModel),
@@ -50,7 +50,7 @@ class _ProjectName extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -94,7 +94,7 @@ class _ProjectProgress extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 8.0),
+            padding: const EdgeInsets.only(left: 8),
             child: Text('${projectModel.estimate}h'),
           ),
         ],

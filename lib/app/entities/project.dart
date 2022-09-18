@@ -1,6 +1,5 @@
 import 'package:isar/isar.dart';
 
-import 'converters/project_status_converter.dart';
 import 'project_status.dart';
 import 'project_task.dart';
 
@@ -8,11 +7,10 @@ part 'project.g.dart';
 
 @Collection()
 class Project {
-  int id = Isar.autoIncrement;
+  Id? id;
   late String name;
   late int estimate;
-
-  @ProjectStatusConverter()
+  @Enumerated(EnumType.name)
   late ProjectStatus status;
 
   final tasks = IsarLinks<ProjectTask>();

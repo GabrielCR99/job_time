@@ -11,10 +11,9 @@ class ProjectTaskModel {
     this.id,
   });
 
-  factory ProjectTaskModel.fromEntity(ProjectTask projectTask) {
-    return ProjectTaskModel(
-      duration: projectTask.duration,
-      name: projectTask.name,
-    );
-  }
+  factory ProjectTaskModel.fromEntity(ProjectTask projectTask) =>
+      ProjectTaskModel(
+        duration: projectTask.duration,
+        name: projectTask.name,
+      );
 }

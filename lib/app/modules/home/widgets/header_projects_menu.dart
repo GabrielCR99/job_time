@@ -29,7 +29,7 @@ class HeaderProjectsMenu extends SliverPersistentHeaderDelegate {
             SizedBox(
               width: constraints.maxWidth * 0.5,
               child: Padding(
-                padding: const EdgeInsets.only(right: 8.0),
+                padding: const EdgeInsets.only(right: 8),
                 child: DropdownButtonFormField<ProjectStatus>(
                   value: ProjectStatus.inProgress,
                   borderRadius: const BorderRadius.all(Radius.circular(15)),
@@ -58,6 +58,7 @@ class HeaderProjectsMenu extends SliverPersistentHeaderDelegate {
                   state.projectStatus == ProjectStatus.inProgress,
               builder: (_, visible) => Visibility(
                 visible: visible,
+                replacement: const Spacer(),
                 child: SizedBox(
                   width: constraints.maxWidth * 0.4,
                   child: ElevatedButton.icon(

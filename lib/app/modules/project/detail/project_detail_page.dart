@@ -1,5 +1,4 @@
 import 'package:asuka/asuka.dart';
-import 'package:asuka/asuka.dart' as asuka;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -40,20 +39,11 @@ class _ProjectDetailPageState extends State<ProjectDetailPage> {
             case ProjectDetailStatus.loading:
               return const Center(child: CircularProgressIndicator.adaptive());
             case ProjectDetailStatus.completed:
-              final totalTasks = projectModel?.tasks.fold<int>(
-                0,
-                (totalValue, task) => (totalValue += task.duration),
-              );
-              return LoadedProjectPage(
-                totalTasks: totalTasks!,
-                projectModel: projectModel!,
-                onPressed: _confirmFinish,
-              );
             case ProjectDetailStatus.failure:
               if (projectModel != null) {
                 final totalTasks = projectModel.tasks.fold<int>(
                   0,
-                  (totalValue, task) => (totalValue += task.duration),
+                  (totalValue, task) => totalValue += task.duration,
                 );
 
                 return LoadedProjectPage(
@@ -70,7 +60,7 @@ class _ProjectDetailPageState extends State<ProjectDetailPage> {
     );
   }
 
-  void _confirmFinish() => asuka.showDialog(
+  void _confirmFinish() => Asuka.showDialog(
         barrierDismissible: false,
         barrierColor: Colors.black.withOpacity(0.5),
         builder: (context) => AlertDialog(

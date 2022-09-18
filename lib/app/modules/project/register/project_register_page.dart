@@ -46,42 +46,40 @@ class _ProjectRegisterPageState extends State<ProjectRegisterPage> {
         ),
         body: Form(
           key: _formKey,
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              children: [
-                TextFormField(
-                  controller: _nameEC,
-                  decoration:
-                      const InputDecoration(label: Text('Nome do projeto')),
-                  validator: Validatorless.required('Nome obrigatório'),
+          child: ListView(
+            padding: const EdgeInsets.all(16),
+            children: [
+              TextFormField(
+                controller: _nameEC,
+                decoration:
+                    const InputDecoration(label: Text('Nome do projeto')),
+                validator: Validatorless.required('Nome obrigatório'),
+              ),
+              const SizedBox(height: 10),
+              TextFormField(
+                controller: _estimateEC,
+                keyboardType: TextInputType.number,
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                validator: Validatorless.multiple([
+                  Validatorless.required('Estimativa obrigatória!'),
+                  Validatorless.number('Deve conter somente números'),
+                ]),
+                decoration:
+                    const InputDecoration(label: Text('Estimativa de horas')),
+              ),
+              const SizedBox(height: 10),
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                height: 49,
+                child: LoadingButton<ProjectRegisterController,
+                    ProjectRegisterStatus>(
+                  onPressed: _registerTask,
+                  label: 'Salvar',
+                  bloc: _controller,
+                  selector: (state) => state == ProjectRegisterStatus.loading,
                 ),
-                const SizedBox(height: 10),
-                TextFormField(
-                  controller: _estimateEC,
-                  keyboardType: TextInputType.number,
-                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                  validator: Validatorless.multiple([
-                    Validatorless.required('Estimativa obrigatória!'),
-                    Validatorless.number('Deve conter somente números'),
-                  ]),
-                  decoration:
-                      const InputDecoration(label: Text('Estimativa de horas')),
-                ),
-                const SizedBox(height: 10),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  height: 49,
-                  child: LoadingButton<ProjectRegisterController,
-                      ProjectRegisterStatus>(
-                    onPressed: _registerTask,
-                    label: 'Salvar',
-                    bloc: _controller,
-                    selector: (state) => state == ProjectRegisterStatus.loading,
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
@@ -96,7 +94,8 @@ class _ProjectRegisterPageState extends State<ProjectRegisterPage> {
       case ProjectRegisterStatus.failure:
         AsukaSnackbar.alert('Erro ao salvar projeto').show();
         break;
-      default:
+      case ProjectRegisterStatus.loading:
+      case ProjectRegisterStatus.initial:
         break;
     }
   }

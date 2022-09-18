@@ -32,11 +32,10 @@ class HomeState extends Equatable {
     List<ProjectModel>? projects,
     HomeStatus? status,
     ProjectStatus? projectStatus,
-  }) {
-    return HomeState._(
-      projects: projects ?? this.projects,
-      status: status ?? this.status,
-      projectStatus: projectStatus ?? this.projectStatus,
-    );
-  }
+  }) =>
+      HomeState._(
+        projects: projects ?? this.projects,
+        status: status ?? this.status,
+        projectStatus: projectStatus ?? this.projectStatus,
+      );
 }
