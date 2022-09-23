@@ -16,7 +16,7 @@ class TaskController extends Cubit<TaskStatus> {
       : _service = service,
         super(TaskStatus.initial);
 
-  void setProject(ProjectModel model) => _model = model;
+  set project(ProjectModel model) => _model = model;
 
   Future<void> register({required String name, required int duration}) async {
     try {

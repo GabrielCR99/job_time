@@ -6,6 +6,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:validatorless/validatorless.dart';
 
 import '../../../core/ui/loading_button.dart';
+import '../../../view_models/project_model.dart';
 import 'controller/task_controller.dart';
 
 class TaskPage extends StatefulWidget {
@@ -24,7 +25,7 @@ class _TaskPageState extends State<TaskPage> {
   @override
   void initState() {
     super.initState();
-    _controller.setProject(Modular.args.data);
+    _controller.project = Modular.args.data as ProjectModel;
   }
 
   @override
