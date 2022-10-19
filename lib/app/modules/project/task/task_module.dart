@@ -12,6 +12,6 @@ class TaskModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute('/', child: (_, args) => const TaskPage()),
+    ChildRoute('/', child: (_, __) => const TaskPage()),
   ];
 }

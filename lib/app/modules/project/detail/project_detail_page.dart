@@ -6,21 +6,11 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'controller/project_detail_controller.dart';
 import 'widgets/loaded_project_page.dart';
 
-class ProjectDetailPage extends StatefulWidget {
-  const ProjectDetailPage({super.key});
+class ProjectDetailPage extends StatelessWidget {
+  ProjectDetailPage({super.key});
 
-  @override
-  State<ProjectDetailPage> createState() => _ProjectDetailPageState();
-}
-
-class _ProjectDetailPageState extends State<ProjectDetailPage> {
-  final _controller = Modular.get<ProjectDetailController>();
-
-  @override
-  void initState() {
-    super.initState();
-    _controller.setProject(Modular.args.data);
-  }
+  final _controller = Modular.get<ProjectDetailController>()
+    ..setProject(Modular.args.data);
 
   @override
   Widget build(BuildContext context) {

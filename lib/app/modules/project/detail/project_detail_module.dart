@@ -14,9 +14,6 @@ class ProjectDetailModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute(
-      Modular.initialRoute,
-      child: (_, __) => const ProjectDetailPage(),
-    ),
+    ChildRoute(Modular.initialRoute, child: (_, __) => ProjectDetailPage()),
   ];
 }

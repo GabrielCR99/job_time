@@ -169,8 +169,6 @@ dart_code_metrics:
       file-nullsafety-migration-cost: 41
       unit-type: "BRL"
 
-
-
   metrics-exclude:
     - test/**
 
@@ -186,6 +184,7 @@ dart_code_metrics:
     - avoid-throw-in-catch-block
     - avoid-unnecessary-type-casts
     - avoid-unused-parameters
+    - avoid-wrapping-in-padding
     - binary-expression-operand-order
     - check-for-equals-in-render-object-setters
     - consistent-update-render-object

@@ -65,15 +65,13 @@ class HomePage extends StatelessWidget {
               BlocSelector<HomeController, HomeState, List<ProjectModel>>(
                 bloc: _controller,
                 selector: (state) => state.projects,
-                builder: (_, projects) {
-                  return SliverList(
-                    delegate: SliverChildListDelegate(
-                      projects
-                          .map((project) => ProjectTile(projectModel: project))
-                          .toList(),
-                    ),
-                  );
-                },
+                builder: (_, projects) => SliverList(
+                  delegate: SliverChildListDelegate(
+                    projects
+                        .map((project) => ProjectTile(projectModel: project))
+                        .toList(),
+                  ),
+                ),
               ),
             ],
           ),

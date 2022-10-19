@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:url_strategy/url_strategy.dart';
 
-import '../../firebase_options.dart';
+import '../firebase_options.dart';
 
 class AppConfig {
   const AppConfig();

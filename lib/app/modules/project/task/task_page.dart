@@ -39,6 +39,8 @@ class _TaskPageState extends State<TaskPage> {
   Widget build(BuildContext context) {
     return BlocListener<TaskController, TaskStatus>(
       bloc: _controller,
+      listenWhen: (_, current) =>
+          current == TaskStatus.success || current == TaskStatus.failure,
       listener: _taskListener,
       child: Scaffold(
         backgroundColor: Colors.white,
