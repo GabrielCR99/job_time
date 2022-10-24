@@ -6,9 +6,8 @@ import 'auth_service.dart';
 
 class AuthServiceImpl implements AuthService {
   final Database _database;
-  AuthServiceImpl({
-    required Database database,
-  }) : _database = database;
+
+  const AuthServiceImpl({required Database database}) : _database = database;
 
   @override
   Future<void> signIn() async {
