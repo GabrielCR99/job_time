@@ -12,15 +12,12 @@ class AppConfig {
     setPathUrlStrategy();
     WidgetsFlutterBinding.ensureInitialized();
 
-    await _setScreenOrientationToPortrait();
+    await SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown],
+    );
     await _firebaseCoreConfig();
   }
 
   Future<void> _firebaseCoreConfig() =>
       Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-
-  Future<void> _setScreenOrientationToPortrait() =>
-      SystemChrome.setPreferredOrientations(
-        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown],
-      );
 }

@@ -22,10 +22,8 @@ class HomePage extends StatelessWidget {
         backgroundColor: Colors.white,
         drawer: Drawer(
           child: SafeArea(
-            child: ListTile(
-              title: const Text('Sair'),
-              onTap: _controller.logout,
-            ),
+            child:
+                ListTile(title: const Text('Sair'), onTap: _controller.logout),
           ),
         ),
         body: SafeArea(

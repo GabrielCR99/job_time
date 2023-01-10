@@ -62,7 +62,7 @@ class _NewTasks extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () async => _getAllProjectTasks(),
+      onTap: _getAllProjectTasks,
       child: Row(
         children: [
           Padding(

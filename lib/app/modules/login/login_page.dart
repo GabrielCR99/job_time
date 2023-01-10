@@ -1,14 +1,13 @@
 import 'package:asuka/asuka.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 
 import 'controller/login_controller.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+  final LoginController controller;
 
-  static final _controller = Modular.get<LoginController>();
+  const LoginPage({required this.controller, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +16,7 @@ class LoginPage extends StatelessWidget {
     return BlocListener<LoginController, LoginState>(
       listenWhen: (previous, current) => previous.status != current.status,
       listener: _showLoginError,
-      bloc: _controller,
+      bloc: controller,
       child: Scaffold(
         body: DecoratedBox(
           decoration: const BoxDecoration(
@@ -38,7 +37,7 @@ class LoginPage extends StatelessWidget {
                   height: 49,
                   width: screenSize.width * 0.8,
                   child: ElevatedButton(
-                    onPressed: _controller.signIn,
+                    onPressed: controller.signIn,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.grey[200],
                     ),
@@ -46,7 +45,7 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
                 BlocSelector<LoginController, LoginState, bool>(
-                  bloc: _controller,
+                  bloc: controller,
                   selector: (state) => state.status == LoginStatus.loading,
                   builder: (_, show) => Visibility(
                     visible: show,

@@ -25,7 +25,7 @@ class ProjectTile extends StatelessWidget {
         ),
       ),
       child: InkWell(
-        onTap: () async => _goToProjectDetail(),
+        onTap: _goToProjectDetail,
         child: Column(
           children: [
             _ProjectName(projectModel: projectModel),

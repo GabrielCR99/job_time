@@ -12,6 +12,9 @@ class LoginModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute('/', child: (_, __) => const LoginPage()),
+    ChildRoute(
+      '/',
+      child: (_, __) => LoginPage(controller: Modular.get<LoginController>()),
+    ),
   ];
 }

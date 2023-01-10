@@ -175,6 +175,7 @@ dart_code_metrics:
   rules:
     - always-remove-listener
     - avoid-border-all
+    - avoid-cascade-after-if-null
     - avoid-collection-methods-with-unrelated-types
     - avoid-global-state
     - avoid-nested-conditional-expressions
@@ -189,6 +190,7 @@ dart_code_metrics:
     - check-for-equals-in-render-object-setters
     - consistent-update-render-object
     - double-literal-format
+    - list-all-equatable-fields
     - newline-before-return
     - no-boolean-literal-compare
     - no-empty-block

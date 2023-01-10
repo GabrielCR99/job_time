@@ -38,12 +38,7 @@ class HomeController extends Cubit<HomeState> {
   }
 
   Future<void> filter(ProjectStatus status) async {
-    emit(
-      state.copyWith(
-        status: HomeStatus.loading,
-        projects: const <ProjectModel>[],
-      ),
-    );
+    emit(state.copyWith(status: HomeStatus.loading, projects: const []));
     _projectStatus = status;
     final projects = await _service.findByStatus(status);
     emit(
