@@ -4,7 +4,7 @@ import 'package:modular_bloc_bind/modular_bloc_bind.dart';
 import 'controller/home_controller.dart';
 import 'home_page.dart';
 
-class HomeModule extends Module {
+final class HomeModule extends Module {
   @override
   final List<Bind> binds = [
     BlocBind.lazySingleton(
@@ -14,6 +14,6 @@ class HomeModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute('/', child: (_, __) => const HomePage()),
+    ChildRoute<void>('/', child: (_, __) => const HomePage()),
   ];
 }

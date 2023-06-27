@@ -7,7 +7,7 @@ enum HomeStatus {
   failure;
 }
 
-class HomeState extends Equatable {
+final class HomeState extends Equatable {
   final List<ProjectModel> projects;
   final HomeStatus status;
   final ProjectStatus projectStatus;

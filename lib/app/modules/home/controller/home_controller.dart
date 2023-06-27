@@ -1,7 +1,7 @@
 import 'dart:developer';
 
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/exceptions/failure.dart';
 import '../../../entities/project_status.dart';
@@ -11,7 +11,9 @@ import '../../../view_models/project_model.dart';
 
 part 'home_state.dart';
 
-class HomeController extends Cubit<HomeState> {
+final class HomeController extends Cubit<HomeState> {
+  var _projectStatus = ProjectStatus.inProgress;
+
   final ProjectService _service;
   final AuthService _authService;
 
@@ -21,8 +23,6 @@ class HomeController extends Cubit<HomeState> {
   })  : _service = service,
         _authService = authService,
         super(const HomeState.initial());
-
-  var _projectStatus = ProjectStatus.inProgress;
 
   ProjectStatus get projectStatus => _projectStatus;
 

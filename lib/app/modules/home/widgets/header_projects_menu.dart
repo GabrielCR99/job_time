@@ -31,34 +31,33 @@ class HeaderProjectsMenu extends SliverPersistentHeaderDelegate {
               child: Padding(
                 padding: const EdgeInsets.only(right: 8),
                 child: DropdownButtonFormField<ProjectStatus>(
-                  value: ProjectStatus.inProgress,
-                  borderRadius: const BorderRadius.all(Radius.circular(15)),
-                  decoration: InputDecoration(
-                    focusedBorder: _dropdownBorderRadius,
-                    contentPadding: const EdgeInsets.all(10),
-                    border: _dropdownBorderRadius,
-                    enabledBorder: _dropdownBorderRadius,
-                  ),
                   items: ProjectStatus.values
                       .map(
                         (e) => DropdownMenuItem(value: e, child: Text(e.label)),
                       )
                       .toList(),
+                  value: ProjectStatus.inProgress,
                   onChanged: (status) {
                     if (status != null) {
                       _controller.filter(status);
                     }
                   },
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.all(10),
+                    focusedBorder: _dropdownBorderRadius,
+                    enabledBorder: _dropdownBorderRadius,
+                    border: _dropdownBorderRadius,
+                  ),
+                  borderRadius: const BorderRadius.all(Radius.circular(15)),
                 ),
               ),
             ),
             BlocSelector<HomeController, HomeState, bool>(
-              bloc: _controller,
               selector: (state) =>
                   state.projectStatus == ProjectStatus.inProgress,
               builder: (_, visible) => Visibility(
-                visible: visible,
                 replacement: const Spacer(),
+                visible: visible,
                 child: SizedBox(
                   width: constraints.maxWidth * 0.4,
                   child: ElevatedButton.icon(
@@ -71,6 +70,7 @@ class HeaderProjectsMenu extends SliverPersistentHeaderDelegate {
                   ),
                 ),
               ),
+              bloc: _controller,
             ),
           ],
         ),

@@ -22,27 +22,24 @@ class _ProjectRegisterPageState extends State<ProjectRegisterPage> {
   final _controller = Modular.get<ProjectRegisterController>();
 
   @override
-  void dispose() {
-    _nameEC.dispose();
-    _estimateEC.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return BlocListener<ProjectRegisterController, ProjectRegisterStatus>(
+      listener: (_, state) => switch (state) {
+        ProjectRegisterStatus.success => Navigator.pop(context),
+        ProjectRegisterStatus.failure =>
+          AsukaSnackbar.alert('Erro ao salvar projeto').show(),
+        ProjectRegisterStatus.loading || ProjectRegisterStatus.initial => null,
+      },
       bloc: _controller,
-      listener: _projectListener,
       child: Scaffold(
-        backgroundColor: Colors.white,
         appBar: AppBar(
-          iconTheme: const IconThemeData(color: Colors.black),
-          elevation: 0,
           title: const Text(
             'Criar novo projeto',
             style: TextStyle(color: Colors.black),
           ),
+          elevation: 0,
           backgroundColor: Colors.white,
+          iconTheme: const IconThemeData(color: Colors.black),
         ),
         body: Form(
           key: _formKey,
@@ -58,46 +55,41 @@ class _ProjectRegisterPageState extends State<ProjectRegisterPage> {
               const SizedBox(height: 10),
               TextFormField(
                 controller: _estimateEC,
+                decoration: const InputDecoration(
+                  label: Text('Estimativa de horas'),
+                ),
                 keyboardType: TextInputType.number,
-                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                 validator: Validatorless.multiple([
                   Validatorless.required('Estimativa obrigatória!'),
                   Validatorless.number('Deve conter somente números'),
                 ]),
-                decoration:
-                    const InputDecoration(label: Text('Estimativa de horas')),
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
               ),
               const SizedBox(height: 10),
               SizedBox(
-                width: MediaQuery.of(context).size.width,
+                width: MediaQuery.sizeOf(context).width,
                 height: 49,
                 child: LoadingButton<ProjectRegisterController,
                     ProjectRegisterStatus>(
                   onPressed: _registerTask,
                   label: 'Salvar',
-                  bloc: _controller,
                   selector: (state) => state == ProjectRegisterStatus.loading,
+                  bloc: _controller,
                 ),
               ),
             ],
           ),
         ),
+        backgroundColor: Colors.white,
       ),
     );
   }
 
-  void _projectListener(BuildContext context, ProjectRegisterStatus state) {
-    switch (state) {
-      case ProjectRegisterStatus.success:
-        Navigator.pop(context);
-        break;
-      case ProjectRegisterStatus.failure:
-        AsukaSnackbar.alert('Erro ao salvar projeto').show();
-        break;
-      case ProjectRegisterStatus.loading:
-      case ProjectRegisterStatus.initial:
-        break;
-    }
+  @override
+  void dispose() {
+    _nameEC.dispose();
+    _estimateEC.dispose();
+    super.dispose();
   }
 
   void _registerTask() {

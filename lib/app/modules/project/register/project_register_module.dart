@@ -4,7 +4,7 @@ import 'package:modular_bloc_bind/modular_bloc_bind.dart';
 import 'controller/project_register_controller.dart';
 import 'project_register_page.dart';
 
-class ProjectRegisterModule extends Module {
+final class ProjectRegisterModule extends Module {
   @override
   final List<Bind> binds = [
     BlocBind.lazySingleton((i) => ProjectRegisterController(service: i())),
@@ -12,6 +12,6 @@ class ProjectRegisterModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute('/', child: (_, __) => const ProjectRegisterPage()),
+    ChildRoute<void>('/', child: (_, __) => const ProjectRegisterPage()),
   ];
 }

@@ -14,6 +14,9 @@ class ProjectDetailModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute(Modular.initialRoute, child: (_, __) => ProjectDetailPage()),
+    ChildRoute<void>(
+      Modular.initialRoute,
+      child: (_, __) => ProjectDetailPage(),
+    ),
   ];
 }

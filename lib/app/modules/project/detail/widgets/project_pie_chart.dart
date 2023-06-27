@@ -23,21 +23,21 @@ class ProjectPieChart extends StatelessWidget {
               value: sanitizedTotalTasks,
               color: theme.primaryColor,
               showTitle: true,
-              title: '$totalTasks h',
               titleStyle: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
               ),
+              title: '$totalTasks h',
             ),
             PieChartSectionData(
               value: residual.toDouble(),
               color: theme.primaryColorLight,
               showTitle: true,
-              title: '$residual h',
               titleStyle: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
               ),
+              title: '$residual h',
             ),
           ]
         : [
@@ -45,32 +45,28 @@ class ProjectPieChart extends StatelessWidget {
               value: sanitizedTotalTasks,
               color: Colors.red,
               showTitle: true,
-              title: '${totalTasks}h',
               titleStyle: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
               ),
+              title: '${totalTasks}h',
             ),
           ];
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 50),
       child: SizedBox(
-        height: 200,
         width: 200,
+        height: 200,
         child: Stack(
           children: [
-            PieChart(
-              PieChartData(
-                sections: chartData,
-              ),
-            ),
+            PieChart(PieChartData(sections: chartData)),
             Center(
               child: Text(
                 '$projectEstimate h',
                 style: TextStyle(
-                  fontSize: 25,
                   color: theme.primaryColor,
+                  fontSize: 25,
                   fontWeight: FontWeight.bold,
                 ),
               ),

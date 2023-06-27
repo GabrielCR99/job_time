@@ -4,7 +4,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import '../../core/database/database.dart';
 import 'auth_service.dart';
 
-class AuthServiceImpl implements AuthService {
+final class AuthServiceImpl implements AuthService {
   final Database _database;
 
   const AuthServiceImpl({required Database database}) : _database = database;

@@ -14,11 +14,11 @@ class ProjectTaskTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(16),
-      margin: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: Colors.grey[200],
         borderRadius: const BorderRadius.all(Radius.circular(10)),
       ),
+      margin: const EdgeInsets.all(10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -34,8 +34,8 @@ class ProjectTaskTile extends StatelessWidget {
                 TextSpan(
                   text: '${task.duration}h',
                   style: const TextStyle(
-                    fontWeight: FontWeight.bold,
                     color: Colors.black,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ],

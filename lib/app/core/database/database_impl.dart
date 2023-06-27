@@ -8,7 +8,7 @@ import '../../entities/project.dart';
 import '../../entities/project_task.dart';
 import 'database.dart';
 
-class DatabaseImpl implements Database {
+final class DatabaseImpl implements Database {
   Isar? _databaseInstance;
 
   @override

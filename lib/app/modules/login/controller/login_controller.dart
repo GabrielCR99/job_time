@@ -1,13 +1,13 @@
 import 'dart:developer';
 
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../services/auth/auth_service.dart';
 
 part 'login_state.dart';
 
-class LoginController extends Cubit<LoginState> {
+final class LoginController extends Cubit<LoginState> {
   final AuthService _authService;
 
   LoginController({required AuthService authService})
@@ -15,8 +15,8 @@ class LoginController extends Cubit<LoginState> {
         super(const LoginState.initial());
 
   Future<void> signIn() async {
+    emit(state.copyWith(status: LoginStatus.loading));
     try {
-      emit(state.copyWith(status: LoginStatus.loading));
       await _authService.signIn();
     } catch (e) {
       log('Erro ao realizar login', error: e);

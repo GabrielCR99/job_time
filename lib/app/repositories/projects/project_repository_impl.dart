@@ -9,7 +9,7 @@ import '../../entities/project_status.dart';
 import '../../entities/project_task.dart';
 import 'project_repository.dart';
 
-class ProjectRepositoryImpl implements ProjectRepository {
+final class ProjectRepositoryImpl implements ProjectRepository {
   final Database _database;
 
   const ProjectRepositoryImpl({required Database database})

@@ -5,7 +5,7 @@ import 'package:url_strategy/url_strategy.dart';
 
 import '../firebase_options.dart';
 
-class AppConfig {
+final class AppConfig {
   const AppConfig();
 
   Future<void> configureApp() async {

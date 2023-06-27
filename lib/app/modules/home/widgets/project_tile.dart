@@ -16,14 +16,14 @@ class ProjectTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      constraints: const BoxConstraints(maxHeight: 90),
-      margin: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
         border: Border.fromBorderSide(
           BorderSide(color: Colors.grey[300]!, width: 3),
         ),
+        borderRadius: const BorderRadius.all(Radius.circular(10)),
       ),
+      constraints: const BoxConstraints(maxHeight: 90),
+      margin: const EdgeInsets.all(10),
       child: InkWell(
         onTap: _goToProjectDetail,
         child: Column(
@@ -57,8 +57,8 @@ class _ProjectName extends StatelessWidget {
           Text(projectModel.name),
           Icon(
             JobTimerIcons.angleDoubleRight,
-            color: Theme.of(context).primaryColor,
             size: 20,
+            color: Theme.of(context).primaryColor,
           ),
         ],
       ),

@@ -28,9 +28,9 @@ class AppModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute('/', child: (_, __) => const SplashPage()),
-    ModuleRoute('/login', module: LoginModule()),
-    ModuleRoute('/home', module: HomeModule()),
-    ModuleRoute('/project', module: ProjectModule()),
+    ChildRoute<void>('/', child: (_, __) => const SplashPage()),
+    ModuleRoute<void>('/login', module: LoginModule()),
+    ModuleRoute<void>('/home', module: HomeModule()),
+    ModuleRoute<void>('/project', module: ProjectModule()),
   ];
 }

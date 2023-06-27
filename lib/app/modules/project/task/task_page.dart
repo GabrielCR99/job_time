@@ -29,29 +29,21 @@ class _TaskPageState extends State<TaskPage> {
   }
 
   @override
-  void dispose() {
-    _nameEC.dispose();
-    _durationEC.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return BlocListener<TaskController, TaskStatus>(
+      listener: _taskListener,
       bloc: _controller,
       listenWhen: (_, current) =>
           current == TaskStatus.success || current == TaskStatus.failure,
-      listener: _taskListener,
       child: Scaffold(
-        backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor: Colors.white,
-          elevation: 0,
-          iconTheme: const IconThemeData(color: Colors.black),
           title: const Text(
             'Criar nova task',
             style: TextStyle(color: Colors.black),
           ),
+          elevation: 0,
+          backgroundColor: Colors.white,
+          iconTheme: const IconThemeData(color: Colors.black),
         ),
         body: Form(
           key: _formKey,
@@ -59,49 +51,59 @@ class _TaskPageState extends State<TaskPage> {
             padding: const EdgeInsets.all(16),
             children: [
               BlocSelector<TaskController, TaskStatus, bool>(
-                bloc: _controller,
                 selector: (state) => state != TaskStatus.loading,
                 builder: (_, enabled) => TextFormField(
-                  enabled: enabled,
-                  decoration:
-                      const InputDecoration(label: Text('Nome da task')),
                   controller: _nameEC,
+                  decoration: const InputDecoration(
+                    label: Text('Nome da task'),
+                  ),
                   validator: Validatorless.required('Nome obrigatório'),
+                  enabled: enabled,
                 ),
+                bloc: _controller,
               ),
               const SizedBox(height: 10),
               BlocSelector<TaskController, TaskStatus, bool>(
                 selector: (state) => state != TaskStatus.loading,
-                bloc: _controller,
                 builder: (_, enabled) => TextFormField(
-                  enabled: enabled,
-                  decoration:
-                      const InputDecoration(label: Text('Duração da task')),
-                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                  keyboardType: TextInputType.number,
                   controller: _durationEC,
+                  decoration: const InputDecoration(
+                    label: Text('Duração da task'),
+                  ),
+                  keyboardType: TextInputType.number,
                   validator: Validatorless.multiple([
                     Validatorless.required('Duração obrigatória'),
                     Validatorless.required('Somente números'),
                   ]),
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                  enabled: enabled,
                 ),
+                bloc: _controller,
               ),
               const SizedBox(height: 10),
               SizedBox(
-                width: MediaQuery.of(context).size.width,
+                width: MediaQuery.sizeOf(context).width,
                 height: 49,
                 child: LoadingButton<TaskController, TaskStatus>(
-                  bloc: _controller,
+                  onPressed: _saveTask,
                   label: 'Salvar',
                   selector: (state) => state == TaskStatus.loading,
-                  onPressed: _saveTask,
+                  bloc: _controller,
                 ),
               ),
             ],
           ),
         ),
+        backgroundColor: Colors.white,
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _nameEC.dispose();
+    _durationEC.dispose();
+    super.dispose();
   }
 
   void _saveTask() {

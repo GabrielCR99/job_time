@@ -1,12 +1,12 @@
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../services/projects/project_service.dart';
 import '../../../../view_models/project_model.dart';
 
 part 'project_detail_state.dart';
 
-class ProjectDetailController extends Cubit<ProjectDetailState> {
+final class ProjectDetailController extends Cubit<ProjectDetailState> {
   final ProjectService _service;
 
   ProjectDetailController({required ProjectService service})

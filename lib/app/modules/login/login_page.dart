@@ -11,20 +11,19 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
+    final screenSize = MediaQuery.sizeOf(context);
 
     return BlocListener<LoginController, LoginState>(
-      listenWhen: (previous, current) => previous.status != current.status,
-      listener: _showLoginError,
+      listener: (_, state) =>
+          AsukaSnackbar.alert(state.errorMessage ?? 'Erro ao realizar login')
+              .show(),
       bloc: controller,
+      listenWhen: (_, current) => current.status == LoginStatus.failure,
       child: Scaffold(
         body: DecoratedBox(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
-              colors: [
-                Color(0xFF0092B9),
-                Color(0xFF0167B2),
-              ],
+              colors: [Color(0xFF0092B9), Color(0xFF0167B2)],
             ),
           ),
           child: Center(
@@ -34,8 +33,8 @@ class LoginPage extends StatelessWidget {
                 Image.asset('assets/images/logo.png'),
                 SizedBox(height: screenSize.height * 0.1),
                 SizedBox(
-                  height: 49,
                   width: screenSize.width * 0.8,
+                  height: 49,
                   child: ElevatedButton(
                     onPressed: controller.signIn,
                     style: ElevatedButton.styleFrom(
@@ -45,7 +44,6 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
                 BlocSelector<LoginController, LoginState, bool>(
-                  bloc: controller,
                   selector: (state) => state.status == LoginStatus.loading,
                   builder: (_, show) => Visibility(
                     visible: show,
@@ -58,6 +56,7 @@ class LoginPage extends StatelessWidget {
                       ),
                     ),
                   ),
+                  bloc: controller,
                 ),
               ],
             ),
@@ -65,12 +64,5 @@ class LoginPage extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  void _showLoginError(BuildContext _, LoginState state) {
-    if (state.status == LoginStatus.failure) {
-      final message = state.errorMessage ?? 'Erro ao realizar login';
-      AsukaSnackbar.alert(message).show();
-    }
   }
 }

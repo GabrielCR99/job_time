@@ -1,8 +1,34 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+part of '../../app_widget.dart';
 
-class AppConfigUi {
-  const AppConfigUi._();
+sealed class AppConfigUi {
+  static final ThemeData theme = ThemeData(
+    inputDecorationTheme: const InputDecorationTheme(
+      labelStyle: TextStyle(color: Colors.black),
+      focusedBorder:
+          OutlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
+      enabledBorder:
+          OutlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
+      border: OutlineInputBorder(),
+    ),
+    useMaterial3: true,
+    primaryColor: const Color(_primaryColor),
+    primaryColorLight: const Color(0xFF219FFF),
+    primarySwatch: _primarySwatch,
+    appBarTheme: const AppBarTheme(
+      systemOverlayStyle: SystemUiOverlayStyle(
+        statusBarColor: Color(0xFF075685),
+        statusBarBrightness: Brightness.light,
+        statusBarIconBrightness: Brightness.light,
+      ),
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+        ),
+      ),
+    ),
+  );
 
   static const _primaryColor = 0xFF0066B0;
 
@@ -19,32 +45,5 @@ class AppConfigUi {
     900: Color(0xFF000000),
   });
 
-  static final ThemeData theme = ThemeData(
-    primarySwatch: _primarySwatch,
-    primaryColor: const Color(_primaryColor),
-    appBarTheme: const AppBarTheme(
-      systemOverlayStyle: SystemUiOverlayStyle(
-        statusBarColor: Color(0xFF075685),
-        statusBarIconBrightness: Brightness.light,
-        statusBarBrightness: Brightness.light,
-      ),
-    ),
-    primaryColorLight: const Color(0xFF219FFF),
-    inputDecorationTheme: const InputDecorationTheme(
-      border: OutlineInputBorder(),
-      enabledBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: Colors.grey),
-      ),
-      focusedBorder:
-          OutlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
-      labelStyle: TextStyle(color: Colors.black),
-    ),
-    elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-        ),
-      ),
-    ),
-  );
+  const AppConfigUi._();
 }

@@ -16,52 +16,45 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<HomeController, HomeState>(
-      bloc: _controller,
       listener: _showError,
+      bloc: _controller,
       child: Scaffold(
-        backgroundColor: Colors.white,
-        drawer: Drawer(
-          child: SafeArea(
-            child:
-                ListTile(title: const Text('Sair'), onTap: _controller.logout),
-          ),
-        ),
         body: SafeArea(
           child: CustomScrollView(
-            cacheExtent: 4 * 100,
             scrollBehavior:
                 const MaterialScrollBehavior().copyWith(overscroll: false),
+            cacheExtent: 4 * 100,
             slivers: [
               const SliverAppBar(
                 title: Text('Projetos'),
-                expandedHeight: 100,
-                toolbarHeight: 100,
                 centerTitle: true,
+                expandedHeight: 100,
                 shape: RoundedRectangleBorder(
                   borderRadius:
                       BorderRadius.vertical(bottom: Radius.circular(16)),
                 ),
+                toolbarHeight: 100,
               ),
               SliverPersistentHeader(
                 delegate: HeaderProjectsMenu(),
                 pinned: true,
               ),
               BlocSelector<HomeController, HomeState, bool>(
-                bloc: _controller,
                 selector: (state) => state.status == HomeStatus.loading,
                 builder: (_, showLoader) => SliverVisibility(
-                  visible: showLoader,
                   sliver: const SliverToBoxAdapter(
                     child: SizedBox(
                       height: 50,
-                      child:
-                          Center(child: CircularProgressIndicator.adaptive()),
+                      child: Center(
+                        child: CircularProgressIndicator.adaptive(),
+                      ),
                     ),
                   ),
+                  visible: showLoader,
                 ),
+                bloc: _controller,
               ),
               BlocSelector<HomeController, HomeState, List<ProjectModel>>(
-                bloc: _controller,
                 selector: (state) => state.projects,
                 builder: (_, projects) => SliverList(
                   delegate: SliverChildListDelegate(
@@ -70,10 +63,20 @@ class HomePage extends StatelessWidget {
                         .toList(),
                   ),
                 ),
+                bloc: _controller,
               ),
             ],
           ),
         ),
+        drawer: Drawer(
+          child: SafeArea(
+            child: ListTile(
+              title: const Text('Sair'),
+              onTap: _controller.logout,
+            ),
+          ),
+        ),
+        backgroundColor: Colors.white,
       ),
     );
   }

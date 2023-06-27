@@ -1,5 +1,5 @@
 import 'package:isar/isar.dart';
 
-abstract class Database {
+abstract interface class Database {
   Future<Isar> openConnection();
 }

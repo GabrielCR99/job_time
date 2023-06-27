@@ -1,8 +1,13 @@
 part of 'project_detail_controller.dart';
 
-enum ProjectDetailStatus { initial, loading, completed, failure }
+enum ProjectDetailStatus {
+  initial,
+  loading,
+  completed,
+  failure;
+}
 
-class ProjectDetailState extends Equatable {
+final class ProjectDetailState extends Equatable {
   final ProjectModel? model;
   final ProjectDetailStatus status;
 
@@ -19,8 +24,8 @@ class ProjectDetailState extends Equatable {
     ProjectDetailStatus? status,
   }) =>
       ProjectDetailState._(
-        model: model ?? this.model,
         status: status ?? this.status,
+        model: model ?? this.model,
       );
 
   @override

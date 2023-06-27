@@ -1,6 +1,6 @@
 import '../entities/project_task.dart';
 
-class ProjectTaskModel {
+final class ProjectTaskModel {
   final String name;
   final int? id;
   final int duration;
@@ -12,8 +12,5 @@ class ProjectTaskModel {
   });
 
   factory ProjectTaskModel.fromEntity(ProjectTask projectTask) =>
-      ProjectTaskModel(
-        duration: projectTask.duration,
-        name: projectTask.name,
-      );
+      ProjectTaskModel(duration: projectTask.duration, name: projectTask.name);
 }

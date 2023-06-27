@@ -2,7 +2,7 @@ import '../entities/project.dart';
 import '../entities/project_status.dart';
 import 'project_task_model.dart';
 
-class ProjectModel {
+final class ProjectModel {
   final String name;
   final int estimate;
   final ProjectStatus status;

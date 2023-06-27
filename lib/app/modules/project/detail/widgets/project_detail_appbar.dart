@@ -28,19 +28,19 @@ class ProjectDetailAppbar extends SliverAppBar {
                     elevation: 2,
                     borderRadius: const BorderRadius.all(Radius.circular(10)),
                     child: Container(
-                      height: 48,
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       decoration: const BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.all(Radius.circular(10)),
                       ),
+                      height: 48,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text('${model.tasks.length} tasks'),
                           Visibility(
-                            visible: model.status != ProjectStatus.finished,
                             replacement: const Text('Projeto finalizado'),
+                            visible: model.status != ProjectStatus.finished,
                             child: _NewTasks(model: model),
                           ),
                         ],
@@ -69,11 +69,7 @@ class _NewTasks extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 8),
             child: CircleAvatar(
               backgroundColor: Theme.of(context).primaryColor,
-              child: const Icon(
-                Icons.add,
-                color: Colors.white,
-                size: 20,
-              ),
+              child: const Icon(Icons.add, size: 20, color: Colors.white),
             ),
           ),
           const Text('Adicionar task'),

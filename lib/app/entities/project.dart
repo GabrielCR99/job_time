@@ -6,7 +6,7 @@ import 'project_task.dart';
 part 'project.g.dart';
 
 @Collection()
-class Project {
+final class Project {
   Id? id;
   late String name;
   late int estimate;

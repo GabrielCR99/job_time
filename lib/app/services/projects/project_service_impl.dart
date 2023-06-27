@@ -8,7 +8,7 @@ import '../../view_models/project_model.dart';
 import '../../view_models/project_task_model.dart';
 import 'project_service.dart';
 
-class ProjectServiceImpl implements ProjectService {
+final class ProjectServiceImpl implements ProjectService {
   final ProjectRepository _repository;
 
   const ProjectServiceImpl({required ProjectRepository repository})

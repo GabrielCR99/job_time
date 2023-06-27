@@ -4,7 +4,7 @@ import 'package:modular_bloc_bind/modular_bloc_bind.dart';
 import 'controller/login_controller.dart';
 import 'login_page.dart';
 
-class LoginModule extends Module {
+final class LoginModule extends Module {
   @override
   final List<Bind> binds = [
     BlocBind.lazySingleton((i) => LoginController(authService: i())),
@@ -12,9 +12,9 @@ class LoginModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute(
+    ChildRoute<void>(
       '/',
-      child: (_, __) => LoginPage(controller: Modular.get<LoginController>()),
+      child: (context, __) => LoginPage(controller: context.read()),
     ),
   ];
 }
