@@ -1,17 +1,21 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:modular_bloc_bind/modular_bloc_bind.dart';
 
 import 'controller/task_controller.dart';
 import 'task_page.dart';
 
 final class TaskModule extends Module {
   @override
-  final List<Bind> binds = [
-    BlocBind.lazySingleton<TaskController>((i) => TaskController(service: i())),
-  ];
+  void binds(Injector i) {
+    super.binds(i);
+    i.addLazySingleton<TaskController>(
+      TaskController.new,
+      config: BindConfig(onDispose: (value) => value.close()),
+    );
+  }
 
   @override
-  final List<ModularRoute> routes = [
-    ChildRoute<void>('/', child: (_, __) => const TaskPage()),
-  ];
+  void routes(RouteManager r) {
+    super.routes(r);
+    r.child('/', child: (_) => const TaskPage());
+  }
 }

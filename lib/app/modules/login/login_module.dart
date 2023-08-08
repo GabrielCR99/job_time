@@ -1,20 +1,21 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:modular_bloc_bind/modular_bloc_bind.dart';
 
 import 'controller/login_controller.dart';
 import 'login_page.dart';
 
 final class LoginModule extends Module {
   @override
-  final List<Bind> binds = [
-    BlocBind.lazySingleton((i) => LoginController(authService: i())),
-  ];
+  void binds(Injector i) {
+    super.binds(i);
+    i.addLazySingleton<LoginController>(
+      LoginController.new,
+      config: BindConfig(onDispose: (value) => value.close()),
+    );
+  }
 
   @override
-  final List<ModularRoute> routes = [
-    ChildRoute<void>(
-      '/',
-      child: (context, __) => LoginPage(controller: context.read()),
-    ),
-  ];
+  void routes(RouteManager r) {
+    super.routes(r);
+    r.child('/', child: (context) => LoginPage(controller: context.read()));
+  }
 }

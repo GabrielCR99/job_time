@@ -6,9 +6,11 @@ import 'task/task_module.dart';
 
 final class ProjectModule extends Module {
   @override
-  final List<ModularRoute> routes = [
-    ModuleRoute<void>('/register', module: ProjectRegisterModule()),
-    ModuleRoute<void>('/detail', module: ProjectDetailModule()),
-    ModuleRoute<void>('/task', module: TaskModule()),
-  ];
+  void routes(RouteManager r) {
+    super.routes(r);
+    r
+      ..module('/register', module: ProjectRegisterModule())
+      ..module('/detail', module: ProjectDetailModule())
+      ..module('/task', module: TaskModule());
+  }
 }

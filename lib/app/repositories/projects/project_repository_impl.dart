@@ -12,8 +12,7 @@ import 'project_repository.dart';
 final class ProjectRepositoryImpl implements ProjectRepository {
   final Database _database;
 
-  const ProjectRepositoryImpl({required Database database})
-      : _database = database;
+  const ProjectRepositoryImpl(this._database);
 
   @override
   Future<void> register(Project project) async {

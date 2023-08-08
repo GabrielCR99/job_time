@@ -11,9 +11,8 @@ part 'project_register_state.dart';
 final class ProjectRegisterController extends Cubit<ProjectRegisterStatus> {
   final ProjectService _service;
 
-  ProjectRegisterController({required ProjectService service})
-      : _service = service,
-        super(ProjectRegisterStatus.initial);
+  ProjectRegisterController(this._service)
+      : super(ProjectRegisterStatus.initial);
 
   Future<void> register({required String name, required int estimate}) async {
     try {

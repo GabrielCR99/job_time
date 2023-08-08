@@ -13,8 +13,7 @@ class AppWidget extends StatelessWidget {
     Modular.setInitialRoute('/');
 
     return MaterialApp.router(
-      routeInformationParser: Modular.routeInformationParser,
-      routerDelegate: Modular.routerDelegate,
+      routerConfig: Modular.routerConfig,
       builder: Asuka.builder,
       title: 'Job Timer',
       theme: AppConfigUi.theme,

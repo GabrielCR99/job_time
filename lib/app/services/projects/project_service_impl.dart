@@ -11,8 +11,7 @@ import 'project_service.dart';
 final class ProjectServiceImpl implements ProjectService {
   final ProjectRepository _repository;
 
-  const ProjectServiceImpl({required ProjectRepository repository})
-      : _repository = repository;
+  const ProjectServiceImpl(this._repository);
 
   @override
   Future<void> register(ProjectModel projectModel) async {

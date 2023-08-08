@@ -17,12 +17,8 @@ final class HomeController extends Cubit<HomeState> {
   final ProjectService _service;
   final AuthService _authService;
 
-  HomeController({
-    required ProjectService service,
-    required AuthService authService,
-  })  : _service = service,
-        _authService = authService,
-        super(const HomeState.initial());
+  HomeController(this._authService, this._service)
+      : super(const HomeState.initial());
 
   ProjectStatus get projectStatus => _projectStatus;
 

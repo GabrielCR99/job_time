@@ -10,9 +10,7 @@ part 'login_state.dart';
 final class LoginController extends Cubit<LoginState> {
   final AuthService _authService;
 
-  LoginController({required AuthService authService})
-      : _authService = authService,
-        super(const LoginState.initial());
+  LoginController(this._authService) : super(const LoginState.initial());
 
   Future<void> signIn() async {
     emit(state.copyWith(status: LoginStatus.loading));

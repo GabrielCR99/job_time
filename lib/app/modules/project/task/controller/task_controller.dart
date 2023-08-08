@@ -12,9 +12,7 @@ final class TaskController extends Cubit<TaskStatus> {
   late final ProjectModel project;
   final ProjectService _service;
 
-  TaskController({required ProjectService service})
-      : _service = service,
-        super(TaskStatus.initial);
+  TaskController(this._service) : super(TaskStatus.initial);
 
   Future<void> register({required String name, required int duration}) async {
     try {

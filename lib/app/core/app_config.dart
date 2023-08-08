@@ -9,8 +9,8 @@ final class AppConfig {
   const AppConfig();
 
   Future<void> configureApp() async {
-    setPathUrlStrategy();
     WidgetsFlutterBinding.ensureInitialized();
+    setPathUrlStrategy();
 
     await SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown],

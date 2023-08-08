@@ -9,9 +9,8 @@ part 'project_detail_state.dart';
 final class ProjectDetailController extends Cubit<ProjectDetailState> {
   final ProjectService _service;
 
-  ProjectDetailController({required ProjectService service})
-      : _service = service,
-        super(const ProjectDetailState.initial());
+  ProjectDetailController(this._service)
+      : super(const ProjectDetailState.initial());
 
   void setProject(ProjectModel model) =>
       emit(state.copyWith(model: model, status: ProjectDetailStatus.completed));

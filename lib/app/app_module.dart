@@ -15,22 +15,22 @@ import 'services/projects/project_service_impl.dart';
 
 class AppModule extends Module {
   @override
-  final List<Bind> binds = [
-    Bind.lazySingleton<Database>((_) => DatabaseImpl()),
-    Bind.lazySingleton<AuthService>((i) => AuthServiceImpl(database: i())),
-    Bind.lazySingleton<ProjectRepository>(
-      (i) => ProjectRepositoryImpl(database: i()),
-    ),
-    Bind.lazySingleton<ProjectService>(
-      (i) => ProjectServiceImpl(repository: i()),
-    ),
-  ];
+  void binds(Injector i) {
+    super.binds(i);
+    i
+      ..addLazySingleton<Database>(DatabaseImpl.new)
+      ..addLazySingleton<AuthService>(AuthServiceImpl.new)
+      ..addLazySingleton<ProjectRepository>(ProjectRepositoryImpl.new)
+      ..addLazySingleton<ProjectService>(ProjectServiceImpl.new);
+  }
 
   @override
-  final List<ModularRoute> routes = [
-    ChildRoute<void>('/', child: (_, __) => const SplashPage()),
-    ModuleRoute<void>('/login', module: LoginModule()),
-    ModuleRoute<void>('/home', module: HomeModule()),
-    ModuleRoute<void>('/project', module: ProjectModule()),
-  ];
+  void routes(RouteManager r) {
+    super.routes(r);
+    r
+      ..child('/', child: (_) => const SplashPage())
+      ..module('/login', module: LoginModule())
+      ..module('/home', module: HomeModule())
+      ..module('/project', module: ProjectModule());
+  }
 }
